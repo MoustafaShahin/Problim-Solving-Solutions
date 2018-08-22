@@ -1,0 +1,27 @@
+#include <iostream>
+
+using namespace std;
+int t,n,maxpoint,ind;
+pair <string,int> teams[100];
+int main()
+{
+    cin>>t;
+    while(t--)
+    {
+
+       cin>>n;
+       for(int i=0;i<n;i++)
+       {
+
+           cin>>teams[i].first>>teams[i].second;
+           if(maxpoint<teams[i].second)
+           {
+               maxpoint=teams[i].second;
+               ind= i;
+           }
+       }
+       cout <<teams[ind].first<< endl;
+       maxpoint =0,ind =0;
+    }
+    return 0;
+}
