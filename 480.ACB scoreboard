@@ -1,0 +1,72 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+struct contestant{
+    int id ,pen, cnt;
+};
+struct input{
+    int time , cid , pid, r;
+};
+bool cmp(contestant b, contestant a){
+    if(b.cnt == a.cnt && b.pen == a.pen)
+        return b.id < a.id;
+    if(b.cnt == a.cnt)
+        return b.pen < a.pen;
+    return b.cnt > a.cnt;
+}
+bool inpCmp(input b , input a){
+    return b.time < a.time;
+}
+int problems[1015][15];
+int C,P,S;
+int a,b,c,d;
+contestant arr[105];
+input v[1001];
+int main()
+{
+    int t;
+    cin >> t;
+    while(t--){
+
+        cin >> C >> P >> S;
+        for(int i=0; i<S; i++)
+            cin >> v[i].time >> v[i].cid >> v[i].pid >> v[i].r;
+        sort(v,v+S,inpCmp);
+        for(int i=0;i<S; i++){
+            if(v[i].r){
+                if(!problems[v[i].cid][v[i].pid]){
+                    problems[v[i].cid][v[i].pid] = v[i].time;
+                    arr[v[i].cid-1].pen += v[i].time;
+                    arr[v[i].cid-1].cnt++;
+                    arr[v[i].cid-1].id = v[i].cid;
+                }
+                else if (problems[v[i].cid][v[i].pid] < 0)
+                {
+                    problems[v[i].cid][v[i].pid] = problems[v[i].cid][v[i].pid]*(-1) + v[i].time ;
+                    arr[v[i].cid-1].pen += problems[v[i].cid][v[i].pid];
+                    arr[v[i].cid-1].cnt++;
+                    arr[v[i].cid-1].id = v[i].cid;
+                }
+            }
+            else{
+                if(!problems[v[i].cid][v[i].pid]){
+                    problems[v[i].cid][v[i].pid] = -20 ;
+                    arr[v[i].cid-1].id = v[i].cid;
+                }
+                else if(problems[v[i].cid][v[i].pid] < 0)
+                    problems[v[i].cid][v[i].pid] += -20;
+                    arr[v[i].cid-1].id = v[i].cid;
+            }
+
+        }
+        for(int i=0; i<C; i++)
+            if(!arr[i].id)
+                arr[i].id = i+1;
+        sort(arr,arr+C,cmp);
+        for(int i=0; i<C; i++)
+            cout << arr[i].id << " " << arr[i].cnt << " " << arr[i].pen << endl;
+        memset(problems,0,sizeof problems);
+        for(int i=0; i<=C; i++)
+            arr[i].id =0 , arr[i].cnt = 0, arr[i].pen = 0;
+    }
+}
