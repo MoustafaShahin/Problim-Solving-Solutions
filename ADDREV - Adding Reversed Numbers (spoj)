@@ -1,0 +1,32 @@
+#include <iostream>
+ 
+using namespace std;
+int t,n,m,z,y,s;
+int rev(int x)
+{
+    int ret = 0;
+    while(x)
+    {
+        ret *=10;
+        ret += x%10;
+        x /=10;
+    }
+    return ret;
+}
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin>>t;
+    while(t--)
+    {
+        cin>>n>>m;
+        z= rev(n);
+        y =rev(m);
+        s= rev(z+y);
+        cout<<s<<endl;
+ 
+    }
+ 
+    return 0;
+}
+ 
