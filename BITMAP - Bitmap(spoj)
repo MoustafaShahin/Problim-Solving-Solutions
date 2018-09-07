@@ -1,0 +1,79 @@
+#include <iostream>
+#include <queue>
+#include <string.h>
+using namespace std;
+string arr[183];
+int ans [183][183];
+int n,m,t,dis;
+pair <pair<int,int>,int> h;
+queue<pair < pair<int,int> , int>  > white;
+int main()
+{
+    cin>>t;
+    while(t--)
+    {
+        memset(ans,-1,sizeof ans);
+        cin>>n>>m;
+        for(int i=0;i<n;i++)
+        {
+            cin>>arr[i];
+            for(int j = 0; j<m;j++)
+            {
+                if(arr[i][j]=='1')
+                { dis =0;
+                    white.push(make_pair(make_pair(i,dis),j));
+                   ans[i][j]=0;
+                }
+            }
+        }
+        while(white.size())
+        {
+            h =white.front();
+            white.pop();
+            for(int i = 0; i<4;i++)
+            {
+                if(i==0)
+                {
+                    if(h.first.first-1>=0&&ans[h.first.first-1][h.second]==-1)
+                        {
+                           ans[h.first.first-1][h.second]= h.first.second +1;
+                            white.push(make_pair(make_pair(h.first.first-1,h.first.second +1),h.second));
+                        }
+                }
+                if(i==1)
+                {
+                    if(h.first.first+1<n&&ans[h.first.first+1][h.second]==-1){
+                            ans[h.first.first+1][h.second]= h.first.second +1;
+                            white.push(make_pair(make_pair(h.first.first+1,h.first.second +1),h.second));
+                    }
+                }
+                if(i==2)
+                {
+                    if(h.second+1<m&&ans[h.first.first][h.second+1]==-1){
+                            ans[h.first.first][h.second+1]=h.first.second+1;
+                            white.push(make_pair(make_pair(h.first.first,h.first.second +1),h.second +1));
+                    }
+                }
+                if(i==3)
+                {
+                    if(h.second-1>=0&&ans[h.first.first][h.second-1]==-1){
+                        ans[h.first.first][h.second-1]=h.first.second+1;
+                        white.push(make_pair(make_pair(h.first.first,h.first.second +1),h.second -1));
+                    }
+                }
+            }
+ 
+ 
+        }
+ 
+         for(int i=0;i<n;i++)
+		{
+			for(int j=0;j<m;j++)
+				{
+				    cout << ans[i][j] << " ";
+				}
+            cout<<endl;
+		}
+    }
+    return 0;
+}
