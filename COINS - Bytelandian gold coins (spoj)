@@ -1,0 +1,36 @@
+#include <iostream>
+using namespace std;
+int n;
+long long arr[1000000];
+ 
+long long solve(long long n)
+{
+    if(n>-1&&n<10)
+    {
+        return n;
+    }
+    if(n<1000000)
+    {
+        if(arr[n])
+        {
+            return arr[n];
+        }
+     else{
+     long long sum=solve(n/2)+solve(n/3)+solve(n/4);
+            arr[n]=max(n,sum);
+            return arr[n];
+     }
+    }
+    return solve(n/2)+solve(n/3)+solve(n/4);
+}
+int main()
+{
+ 
+	while(cin>>n)
+	{
+ 
+cout<<solve(n)<<endl;
+	}
+    return 0;
+}
+ 
