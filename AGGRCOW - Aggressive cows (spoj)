@@ -1,0 +1,51 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+int n ,m,t,inputs[100000];
+bool check(int des)
+{
+    int i ,last= inputs[0],counter = 1;
+    for(int i=1;i<n;i++)
+    {
+        if (inputs[i]-last>=des)
+        {
+            last = inputs[i];
+            counter++;
+        }
+    }
+    return counter>=m;
+}
+int binarySearch()
+{
+   int s = 1 ,ret=0,mid,last=inputs[n-1]-inputs[0];
+   while(s<=last)
+   {
+       mid = (s+last)/2;
+       if (check(mid))
+       {
+           s= mid+1;
+           ret = mid;
+       }
+       else last = mid-1;
+   }
+   return ret;
+}
+int main()
+{
+ 
+    cin>>t;
+    while(t)
+    {
+ 
+        cin>>n>>m;
+        for(int i = 0;i<n;i++)
+        {
+            cin>>inputs[i];
+        }
+        sort(inputs,inputs+n);
+        t--;
+        cout<<binarySearch()<<endl;
+    }
+    return 0;
+}
+ 
