@@ -1,0 +1,16 @@
+#include <iostream>
+#include <iomanip>
+using namespace std;
+double l;
+int main()
+{
+    double pi = 3.14159;
+    while(cin>>l && l!=0)
+    {
+        double area = (l*l/2)/pi;
+        cout<<fixed<<setprecision(2)<<area<<endl;
+    }
+ 
+    return 0;
+}
+ 
