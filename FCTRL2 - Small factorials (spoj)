@@ -1,0 +1,80 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+void fact(int num,int a[],int n) 
+{
+     int temp=0,x=0,i=0,j,k;
+     for(j=num-1;j>0;j--)
+     {    i=0;
+         for(k=n;k>0;k--)
+        {
+              x= a[i]*j + temp;
+ 
+              a[i]= x%10;
+ 
+              temp= x/10;
+               i++;
+        }
+        
+        while(temp!=0)
+        {
+           a[i]=temp%10;
+          temp=temp/10;
+           i++;
+           n=i;
+        }
+     }
+ 
+     for(j=n-1;j>=0;j--)
+        printf("%d",a[j]);
+ 
+ printf("\n");
+}
+ 
+int main()
+ 
+{
+ 
+    int t;
+ 
+    scanf("%d",&t);
+ 
+    while(t--)
+ 
+   {   int a[200]={0};
+ 
+       int n;
+ 
+       scanf("%d",&n);
+ 
+       int n2=n; int i=0;
+ 
+       while(n>0)
+ 
+       {
+ 
+           a[i]=n%10;
+ 
+           n=n/10;
+ 
+ 
+ 
+           i=i+1;
+ 
+       }
+ 
+       int k=i;
+ 
+ 
+ 
+       fact(n2,a,k);
+ 
+   }
+ 
+   return 0;
+ 
+ 
+ 
+ 
+ 
+} 
